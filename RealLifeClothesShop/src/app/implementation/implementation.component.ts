@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-implementation',
   templateUrl: './implementation.component.html',
-  styleUrls: ['./implementation.component.sass']
+  styleUrls: ['./implementation.component.scss'],
 })
 export class ImplementationComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
