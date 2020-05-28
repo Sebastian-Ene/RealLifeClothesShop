@@ -1,3 +1,19 @@
 .container {
-  margin: 6em;
+  margin: 5em 12em;
+  display: grid;
+  grid-template-columns: 25% 75%;
+
+  button {
+    display: block;
+    background-color: whitesmoke;
+    border-radius: 1em;
+    outline: none;
+    min-width: 8em;
+    padding: 1em 0em;
+    margin: 0em 1em 1em 1em;
+  }
+}
+
+.left {
+  padding: 1em;
 }
