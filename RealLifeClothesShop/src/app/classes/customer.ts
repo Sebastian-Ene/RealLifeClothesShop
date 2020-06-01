@@ -1,4 +1,4 @@
-export class Customers {
+export class Customer {
   private id: number;
   firstName: string;
   lastName: string;

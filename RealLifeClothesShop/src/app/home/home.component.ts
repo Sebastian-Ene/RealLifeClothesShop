@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Customers } from '../classes/customers';
+import { Customer } from '../classes/customer';
 
 @Component({
   selector: 'app-home',
@@ -7,25 +7,20 @@ import { Customers } from '../classes/customers';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  cust: [{}];
+  displayCustomers = 'none';
+  customers = [];
   custId: number;
   custFName: string;
   custLName: string;
-  altu = new Customers(this.custId, this.custFName, this.custLName);
-  constructor() {}
-  showCust() {}
-  ngOnInit(): void {}
-  a() {
-    this.custId = 1;
-    this.custFName = 'Andrei';
-    this.custLName = 'Ionescu';
-    this.cust[0] = this.altu.custGetter();
-    console.log(this.cust);
-    this.custId = 2;
-    this.custFName = 'aAndrei';
-    this.custLName = 'aaIonescu';
-    let unu = new Customers(this.custId, this.custFName, this.custLName);
-    this.cust.push(unu.custGetter());
-    console.log(this.cust);
+  constructor() { }
+
+  ngOnInit(): void { }
+  addCustomer() {
+    this.displayCustomers = 'block';
+    this.customers.push(new Customer(
+      this.custId,
+      this.custFName,
+      this.custLName
+    ));
   }
 }

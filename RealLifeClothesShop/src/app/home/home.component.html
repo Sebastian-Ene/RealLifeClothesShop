@@ -1,23 +1,29 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
   <div class="left">
-    <button (click)="a()">Customers</button><button>Products</button
-    ><button>
-      Jeans</button
-    ><button>T-shirts</button><button>Dresses</button
-    ><button>
-      Dressrooms
-    </button>
+    <button (click)="(displayCustomers=='none')? displayCustomers='block':displayCustomers='none'">Customers </button>
+    <button>Products</button>
+    <button>Jeans</button>
+    <button>T-shirts</button>
+    <button>Dresses</button>
+    <button>Dressrooms</button>
     <button>Select customer</button>
-    <button>Add customer</button>
+    <button (click)='addCustomer()'>Add customer</button>
+    <label for="custFName">First Name:</label>
+    <input type="text" (keyup)="custFName=$event.target.value"> <br>
+    <label for="custLName">Last Name:</label>
+    <input type="text" (keyup)="custLName=$event.target.value">
     <button>Remove customer</button>
     <button>Use Dressroom</button>
     <button>Free Dressroom</button>
     <button>Add product</button>
     <button>Show total</button>
   </div>
-  <div class="right">
-    <div class="default"></div>
+  <div class=" right">
+    <div class="customers" *ngFor="let Customer of customers; index as i" [style.display]="displayCustomers">
+      First Name: {{ customers[i].firstName }}
+      Last Name: {{ customers[i].lastName }} <br />
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

@@ -1,8 +1,8 @@
-import { Customers } from './customers';
+import { Customer } from './customer';
 
 /*describe('Customers', () => {
   it('should create an instance', () => {
-    expect(new Customers()).toBeTruthy();
+    expect(new Customer()).toBeTruthy();
   });
 });
 */
