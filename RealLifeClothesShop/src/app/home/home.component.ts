@@ -8,6 +8,7 @@ import { Customer } from '../classes/customer';
 })
 export class HomeComponent implements OnInit {
   displayCustomers = 'none';
+  selectedCustomer: Array<string>;
   customers = [];
   custId: number;
   custFName: string;
@@ -22,5 +23,6 @@ export class HomeComponent implements OnInit {
       this.custFName,
       this.custLName
     ));
+    console.log('Added Customer');
   }
 }

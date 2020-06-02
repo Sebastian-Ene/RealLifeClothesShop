@@ -20,9 +20,16 @@
     <button>Show total</button>
   </div>
   <div class=" right">
-    <div class="customers" *ngFor="let Customer of customers; index as i" [style.display]="displayCustomers">
-      First Name: {{ customers[i].firstName }}
-      Last Name: {{ customers[i].lastName }} <br />
+    <div class="customersList" [style.display]="displayCustomers">
+      <div class="customers" *ngFor="let Customer of customers; index as i"
+        (click)="selectedCustomer=[customers[i].firstName, customers[i].lastName] ">
+        First Name: {{ customers[i].firstName }}
+        Last Name: {{ customers[i].lastName }} <br />
+      </div>
+      <p *ngIf="selectedCustomer">Selected customer is:
+        First Name: {{ selectedCustomer[0] }}
+        Last Name: {{ selectedCustomer[1] }} <br />
+      </p>
     </div>
   </div>
 </div>
