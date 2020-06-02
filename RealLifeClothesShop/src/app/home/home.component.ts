@@ -25,4 +25,8 @@ export class HomeComponent implements OnInit {
     ));
     console.log('Added Customer');
   }
+  selectCustomer(i: number) {
+    this.selectedCustomer = [this.customers[i].custGetter()[1], this.customers[i].custGetter()[2]];
+  }
 }
+

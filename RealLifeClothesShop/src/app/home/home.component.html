@@ -21,10 +21,9 @@
   </div>
   <div class=" right">
     <div class="customersList" [style.display]="displayCustomers">
-      <div class="customers" *ngFor="let Customer of customers; index as i"
-        (click)="selectedCustomer=[customers[i].firstName, customers[i].lastName] ">
-        First Name: {{ customers[i].firstName }}
-        Last Name: {{ customers[i].lastName }} <br />
+      <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)">
+        First Name: {{ customers[i].custGetter()[1] }}
+        Last Name: {{ customers[i].custGetter()[2] }} <br />
       </div>
       <p *ngIf="selectedCustomer">Selected customer is:
         First Name: {{ selectedCustomer[0] }}
