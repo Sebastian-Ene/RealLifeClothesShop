@@ -8,7 +8,7 @@ import { Customer } from '../classes/customer';
 })
 export class HomeComponent implements OnInit {
   displayCustomers = 'none';
-  selectedCustomer: Array<string>;
+  selectedCustomer: number;
   customers = [];
   custId: number;
   custFName: string;
@@ -26,7 +26,13 @@ export class HomeComponent implements OnInit {
     console.log('Added Customer');
   }
   selectCustomer(i: number) {
-    this.selectedCustomer = [this.customers[i].custGetter()[1], this.customers[i].custGetter()[2]];
+
+    this.selectedCustomer = i;
+  }
+  removeCustomer(i: number) {
+    this.customers.splice(i, 1);
+    this.selectedCustomer = null;
+    console.log('Removed Customer');
   }
 }
 

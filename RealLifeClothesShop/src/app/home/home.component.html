@@ -13,7 +13,7 @@
     <input type="text" (keyup)="custFName=$event.target.value"> <br>
     <label for="custLName">Last Name:</label>
     <input type="text" (keyup)="custLName=$event.target.value">
-    <button>Remove customer</button>
+    <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
     <button>Use Dressroom</button>
     <button>Free Dressroom</button>
     <button>Add product</button>
@@ -25,9 +25,9 @@
         First Name: {{ customers[i].custGetter()[1] }}
         Last Name: {{ customers[i].custGetter()[2] }} <br />
       </div>
-      <p *ngIf="selectedCustomer">Selected customer is:
-        First Name: {{ selectedCustomer[0] }}
-        Last Name: {{ selectedCustomer[1] }} <br />
+      <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is:
+        First Name: {{ customers[selectedCustomer].custGetter()[1] }}
+        Last Name: {{ customers[selectedCustomer].custGetter()[2] }} <br />
       </p>
     </div>
   </div>
