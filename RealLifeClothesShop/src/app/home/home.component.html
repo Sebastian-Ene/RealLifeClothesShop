@@ -2,18 +2,19 @@
 <div class="container">
   <div class="left">
     <button (click)="(displayCustomers=='none')? displayCustomers='block':displayCustomers='none'">Customers </button>
+    <button (click)="addPresetCust()">Add Preset Customer</button>
     <button>Products</button>
     <button>Jeans</button>
     <button>T-shirts</button>
     <button>Dresses</button>
-    <button>Dressrooms</button>
-    <button>Select customer</button>
-    <button (click)='addCustomer()'>Add customer</button>
+
+    <button (click)='addCustomer(custId,custFName,custLName)'>Add customer</button>
     <label for="custFName">First Name:</label>
     <input type="text" (keyup)="custFName=$event.target.value"> <br>
     <label for="custLName">Last Name:</label>
     <input type="text" (keyup)="custLName=$event.target.value">
     <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
+    <button>Dressrooms</button>
     <button>Use Dressroom</button>
     <button>Free Dressroom</button>
     <button>Add product</button>
@@ -21,9 +22,17 @@
   </div>
   <div class=" right">
     <div class="customersList" [style.display]="displayCustomers">
+      <p> Customers in shop: {{customers.length}}/10</p>
       <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)">
         First Name: {{ customers[i].custGetter()[1] }}
         Last Name: {{ customers[i].custGetter()[2] }} <br />
+      </div>
+      <div class="customersQueueContainer" *ngIf="(customersQueue.length)">
+        <p>Customers in queue outside</p>
+        <div class="customersQueue" *ngFor="let Customer of customersQueue; index as i">
+          First Name: {{ customersQueue[i].custGetter()[1] }}
+          Last Name: {{ customersQueue[i].custGetter()[2] }} <br />
+        </div>
       </div>
       <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is:
         First Name: {{ customers[selectedCustomer].custGetter()[1] }}
