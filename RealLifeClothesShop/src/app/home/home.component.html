@@ -1,21 +1,22 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
   <div class="left">
-    <button (click)="(displayCustomers=='none')? displayCustomers='block':displayCustomers='none'">Customers </button>
+    <button (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
     <button (click)="addPresetCust()">Add Preset Customer</button>
-    <button>Products</button>
-    <button>Jeans</button>
-    <button>T-shirts</button>
-    <button>Dresses</button>
-
-    <button (click)='addCustomer(custId,custFName,custLName)'>Add customer</button>
+    <button (click)="displayProducts=displayToggle(displayProducts)">Products</button>
+    <div class="productButtons" [style.display]="displayProducts">
+      <button>Jeans</button>
+      <button>T-shirts</button>
+      <button>Dresses</button>
+    </div>
+    <button (click)='addCustomer(custFName,custLName)'>Add customer</button>
     <label for="custFName">First Name:</label>
     <input type="text" (keyup)="custFName=$event.target.value"> <br>
     <label for="custLName">Last Name:</label>
     <input type="text" (keyup)="custLName=$event.target.value">
     <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
-    <button>Dressrooms</button>
-    <button>Use Dressroom</button>
+    <button (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
+    <button (click)="useDressroom(selectedCustomer)">Use Dressroom</button>
     <button>Free Dressroom</button>
     <button>Add product</button>
     <button>Show total</button>
@@ -24,20 +25,28 @@
     <div class="customersList" [style.display]="displayCustomers">
       <p> Customers in shop: {{customers.length}}/10</p>
       <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)">
-        First Name: {{ customers[i].custGetter()[1] }}
-        Last Name: {{ customers[i].custGetter()[2] }} <br />
+        First Name: {{ customers[i].custGetter()[0] }}
+        Last Name: {{ customers[i].custGetter()[1] }} <br />
       </div>
       <div class="customersQueueContainer" *ngIf="(customersQueue.length)">
         <p>Customers in queue outside</p>
         <div class="customersQueue" *ngFor="let Customer of customersQueue; index as i">
-          First Name: {{ customersQueue[i].custGetter()[1] }}
-          Last Name: {{ customersQueue[i].custGetter()[2] }} <br />
+          First Name: {{ customersQueue[i].custGetter()[0] }}
+          Last Name: {{ customersQueue[i].custGetter()[1] }} <br />
         </div>
       </div>
       <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is:
-        First Name: {{ customers[selectedCustomer].custGetter()[1] }}
-        Last Name: {{ customers[selectedCustomer].custGetter()[2] }} <br />
+        First Name: {{ customers[selectedCustomer].custGetter()[0] }}
+        Last Name: {{ customers[selectedCustomer].custGetter()[1] }} <br />
       </p>
+    </div>
+    <div class="dresroom" [style.display]="displayDresrooms">
+      Dressroom 1: {{(dressrooms[1])? dressrooms[1].custGetter()[0] +  ' ' + dressrooms[1].custGetter()[1]: "Free"}}
+      <br>
+      Dressroom 2: {{(dressrooms[2])? dressrooms[2].custGetter()[0] +  ' ' + dressrooms[2].custGetter()[1]: "Free"}}
+      <br>
+      Dressroom 3: {{(dressrooms[3])? dressrooms[3].custGetter()[0] +  ' ' + dressrooms[3].custGetter()[1]: "Free"}}
+      <br>
     </div>
   </div>
 </div>

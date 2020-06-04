@@ -1,8 +1,9 @@
 export class Products {
-  color: string;
-  price: number;
+  private color: string;
+  private price: number;
   constructor(color: string, price: number) {
     this.color = color;
     this.price = price;
   }
+
 }

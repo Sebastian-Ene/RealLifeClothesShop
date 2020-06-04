@@ -1,18 +1,15 @@
 export class Customer {
-  private id: number;
   private firstName: string;
   private lastName: string;
-  constructor(id: number, firstName: string, lastName: string) {
-    this.id = id;
+  constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
-  custSetter(id: number, firstName: string, lastName: string) {
-    this.id = id;
+  custSetter(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
   custGetter() {
-    return [this.id, this.firstName, this.lastName];
+    return [this.firstName, this.lastName];
   }
 }
