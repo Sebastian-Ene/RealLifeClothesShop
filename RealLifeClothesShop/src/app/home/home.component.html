@@ -17,7 +17,7 @@
     <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
     <button (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
     <button (click)="useDressroom(selectedCustomer)">Use Dressroom</button>
-    <button>Free Dressroom</button>
+    <button (click)="freeDressroom()">Free Dressroom</button>
     <button>Add product</button>
     <button>Show total</button>
   </div>
@@ -41,11 +41,14 @@
       </p>
     </div>
     <div class="dresroom" [style.display]="displayDresrooms">
-      Dressroom 1: {{(dressrooms[1])? dressrooms[1].custGetter()[0] +  ' ' + dressrooms[1].custGetter()[1]: "Free"}}
+      <span (click)="selectedDressroom=1"> Dressroom 1:
+        {{(dressrooms[1])? dressrooms[1].custGetter()[0] +  ' ' + dressrooms[1].custGetter()[1]: "Free"}} </span>
       <br>
-      Dressroom 2: {{(dressrooms[2])? dressrooms[2].custGetter()[0] +  ' ' + dressrooms[2].custGetter()[1]: "Free"}}
+      <span (click)="selectedDressroom=2"> Dressroom 2:
+        {{(dressrooms[2])? dressrooms[2].custGetter()[0] +  ' ' + dressrooms[2].custGetter()[1]: "Free"}} </span>
       <br>
-      Dressroom 3: {{(dressrooms[3])? dressrooms[3].custGetter()[0] +  ' ' + dressrooms[3].custGetter()[1]: "Free"}}
+      <span (click)="selectedDressroom=3"> Dressroom 3:
+        {{(dressrooms[3])? dressrooms[3].custGetter()[0] +  ' ' + dressrooms[3].custGetter()[1]: "Free"}} </span>
       <br>
     </div>
   </div>

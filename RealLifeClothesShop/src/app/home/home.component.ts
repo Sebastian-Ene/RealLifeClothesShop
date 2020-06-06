@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
   displayCustomers = 'none';
   displayProducts = 'none';
   displayDresrooms = 'none';
-  selectedCustomer: number;
+  selectedCustomer: number = null;
+  selectedDressroom: number = null;
   dressrooms = [null, null, null, null];
   customers = [];
   customersQueue = [];
@@ -43,13 +44,11 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     else if (aCustLName == undefined || '' || null) { alert('Please complete the Last Name field'); }
     else {
-      console.log(aCustFName, aCustLName);
       if (this.customers.length < 10) {
         this.customers.push(new Customer(
           aCustFName,
           aCustLName
         ));
-        console.log('Added Customer');
       }
 
       else {
@@ -57,7 +56,6 @@ export class HomeComponent implements OnInit {
           aCustFName,
           aCustLName
         ));
-        console.log('Added Customer to Queue');
       }
     }
   }
@@ -80,7 +78,6 @@ export class HomeComponent implements OnInit {
     if (this.anythingSelected(i)) {
       this.customers.splice(i, 1);
       this.selectedCustomer = null;
-      console.log('Removed Customer');
       this.queueToShop();
       this.displayCustomers = 'block';
     }
@@ -111,7 +108,10 @@ export class HomeComponent implements OnInit {
         else { this.dressrooms[emptyDressroom] = this.customers[selectedCustomer]; }
       }
     }
+    this.displayDresrooms = 'block';
   }
-
+  freeDressroom() {
+    if (this.dressrooms[this.selectedDressroom] == null || undefined) { alert('Select a dressroom that is not empty!'); }
+    this.dressrooms[this.selectedDressroom] = null;
+  }
 }
-
