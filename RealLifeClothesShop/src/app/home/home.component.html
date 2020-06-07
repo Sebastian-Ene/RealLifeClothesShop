@@ -17,38 +17,46 @@
     <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
     <button (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
     <button (click)="useDressroom(selectedCustomer)">Use Dressroom</button>
-    <button (click)="freeDressroom()">Free Dressroom</button>
+    <button (click)="freeDressroom()">Leave Dressroom</button>
     <button>Add product</button>
     <button>Show total</button>
   </div>
   <div class=" right">
     <div class="customersList" [style.display]="displayCustomers">
+      <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is: <br>
+        First Name: {{ customers[selectedCustomer].custGetter().firstName }} <br>
+        Last Name: {{ customers[selectedCustomer].custGetter().lastName }} <br>
+        Product List: {{customers[selectedCustomer].productList}} <br>
+        Total: {{customers[selectedCustomer].total}}
+      </p>
       <p> Customers in shop: {{customers.length}}/10</p>
       <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)">
-        First Name: {{ customers[i].custGetter()[0] }}
-        Last Name: {{ customers[i].custGetter()[1] }} <br />
+        {{ customers[i].custGetter().firstName }}
+        {{ customers[i].custGetter().lastName }} <br />
       </div>
       <div class="customersQueueContainer" *ngIf="(customersQueue.length)">
         <p>Customers in queue outside</p>
         <div class="customersQueue" *ngFor="let Customer of customersQueue; index as i">
-          First Name: {{ customersQueue[i].custGetter()[0] }}
-          Last Name: {{ customersQueue[i].custGetter()[1] }} <br />
+          {{ customersQueue[i].custGetter().firstName }}
+          {{ customersQueue[i].custGetter().lastName }} <br />
         </div>
       </div>
-      <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is:
-        First Name: {{ customers[selectedCustomer].custGetter()[0] }}
-        Last Name: {{ customers[selectedCustomer].custGetter()[1] }} <br />
-      </p>
+    </div>
+    <div class="products">
+      Products:
     </div>
     <div class="dresroom" [style.display]="displayDresrooms">
       <span (click)="selectedDressroom=1"> Dressroom 1:
-        {{(dressrooms[1])? dressrooms[1].custGetter()[0] +  ' ' + dressrooms[1].custGetter()[1]: "Free"}} </span>
+        {{(dressrooms[1])? dressrooms[1].custGetter().firstName +  ' ' + dressrooms[1].custGetter().lastName: "Empty"}}
+      </span>
       <br>
       <span (click)="selectedDressroom=2"> Dressroom 2:
-        {{(dressrooms[2])? dressrooms[2].custGetter()[0] +  ' ' + dressrooms[2].custGetter()[1]: "Free"}} </span>
+        {{(dressrooms[2])? dressrooms[2].custGetter().firstName +  ' ' + dressrooms[2].custGetter().lastName: "Empty"}}
+      </span>
       <br>
       <span (click)="selectedDressroom=3"> Dressroom 3:
-        {{(dressrooms[3])? dressrooms[3].custGetter()[0] +  ' ' + dressrooms[3].custGetter()[1]: "Free"}} </span>
+        {{(dressrooms[3])? dressrooms[3].custGetter().firstName +  ' ' + dressrooms[3].custGetter().lastName: "Empty"}}
+      </span>
       <br>
     </div>
   </div>

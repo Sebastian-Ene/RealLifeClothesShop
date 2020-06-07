@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../classes/customer';
 import { mockCust } from './mockCustomers';
+import { mockJeans, mockTShirts, mockDresses } from './mockProducts';
 
 
 @Component({
@@ -12,6 +13,9 @@ export class HomeComponent implements OnInit {
   displayCustomers = 'none';
   displayProducts = 'none';
   displayDresrooms = 'none';
+  jeans = [];
+  tShirts = [];
+  dresses = [];
   selectedCustomer: number = null;
   selectedDressroom: number = null;
   dressrooms = [null, null, null, null];
@@ -21,7 +25,13 @@ export class HomeComponent implements OnInit {
   custLName: string;
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getJeans();
+    this.getDresses();
+    this.getTShirts();
+    console.log(this.jeans, this.dresses, this.tShirts);
+
+  }
 
   displayToggle(toToggle) {
     (toToggle === 'none') ? toToggle = 'block' : toToggle = 'none';
@@ -35,6 +45,24 @@ export class HomeComponent implements OnInit {
       return 0;
     }
     else { return 1; }
+  }
+
+  getJeans() {
+    for (let i = 0; i < 10; i++) {
+      this.jeans.push(mockJeans[i]);
+    }
+  }
+
+  getTShirts() {
+    for (let i = 0; i < 10; i++) {
+      this.tShirts.push(mockTShirts[i]);
+    }
+  }
+
+  getDresses() {
+    for (let i = 0; i < 10; i++) {
+      this.dresses.push(mockDresses[i]);
+    }
   }
 
   addCustomer(aCustFName, aCustLName) {
@@ -74,12 +102,17 @@ export class HomeComponent implements OnInit {
     this.selectedCustomer = i;
   }
 
-  removeCustomer(i: number) {
-    if (this.anythingSelected(i)) {
-      this.customers.splice(i, 1);
-      this.selectedCustomer = null;
+  removeCustomer(j: number) {
+    if (this.anythingSelected(j)) {
+      for (let i = 1; i < 4; i++) {
+        if (this.dressrooms[i] === this.customers[j]) {
+          this.dressrooms[i] = null;
+        }
+      }
+      this.customers.splice(j, 1);
       this.queueToShop();
       this.displayCustomers = 'block';
+      this.selectedCustomer = null;
     }
   }
 

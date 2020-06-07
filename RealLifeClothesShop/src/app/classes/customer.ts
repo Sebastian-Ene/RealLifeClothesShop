@@ -1,15 +1,20 @@
 export class Customer {
   private firstName: string;
   private lastName: string;
+  productList: [];
+  total: number;
+
   constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.productList = [];
+    this.total = 0;
   }
-  custSetter(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
+
   custGetter() {
-    return [this.firstName, this.lastName];
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+    };
   }
 }
