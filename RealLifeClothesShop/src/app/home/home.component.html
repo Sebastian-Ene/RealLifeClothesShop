@@ -13,7 +13,7 @@
 
       Total: {{customers[selectedCustomer].total}}
     </p>
-    <button class="mainbtn" (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
+    <button style="margin-left: -2em" (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
     <button (click)="addPresetCust()" [style.display]="displayCustomers">Add Preset Customer</button>
     <button (click)='addCustomer(custFName,custLName)' [style.display]="displayCustomers">Add customer</button>
     <label for="custFName" [style.display]="displayCustomers">First Name:</label>
@@ -21,12 +21,12 @@
     <label for="custLName" [style.display]="displayCustomers">Last Name:</label>
     <input type="text" (keyup)="custLName=$event.target.value" [style.display]="displayCustomers">
     <button (click)="removeCustomer(selectedCustomer)" [style.display]="displayCustomers">Remove customer</button>
-    <button class="mainbtn" (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
+    <button style="margin-left: -2em" (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
     <button (click)="useDressroom(selectedCustomer)" [style.display]="displayDresrooms">Use Dressroom</button>
     <button (click)="freeDressroom()" [style.display]="displayDresrooms">Leave Dressroom</button>
-    <button class="mainbtn"
+    <button style="margin-left: -2em"
       (click)="displayProducts=displayToggle(displayProducts); displayProductList=displayToggle(displayProductList)">Products</button>
-    <div class="productButtons" [style.display]="displayProducts">
+    <div [style.display]="displayProducts">
       <button (click)="displayJeans=displayToggle(displayJeans)">Jeans</button>
       <button (click)="displayTShirts=displayToggle(displayTShirts)">T-shirts</button>
       <button (click)="displayDresses=displayToggle(displayDresses)">Dresses</button>
