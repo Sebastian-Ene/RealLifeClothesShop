@@ -1,71 +1,81 @@
 export const mockJeans = [
   {
+    article: 'Jeans',
     uid: '011100', // first 2 digits: identity, 3rd digit: 1 for jeans, 456th digits: price
     price: 100,
-    color: 'blue',
+    color: 'Blue',
     size: 32,
     numberOfPockets: 4,
   },
   {
+    article: 'Jeans',
     uid: '021100',
     price: 100,
-    color: 'blue',
+    color: 'Blue',
     size: 32,
     numberOfPockets: 4,
   },
   {
+    article: 'Jeans',
     uid: '031150',
     price: 150,
-    color: 'black',
+    color: 'Black',
     size: 34,
     numberOfPockets: 3,
   },
   {
+    article: 'Jeans',
     uid: '041150',
     price: 150,
-    color: 'white',
+    color: 'White',
     size: 34,
     numberOfPockets: 3,
   },
   {
+    article: 'Jeans',
     uid: '051200',
     price: 200,
-    color: 'blue',
+    color: 'Blue',
     size: 36,
     numberOfPockets: 4,
   },
   {
+    article: 'Jeans',
     uid: '061200',
     price: 200,
-    color: 'black',
+    color: 'Black',
     size: 36,
     numberOfPockets: 3,
   },
   {
+    article: 'Jeans',
     uid: '071250',
     price: 250,
-    color: 'blue',
+    color: 'Blue',
     size: 32,
     numberOfPockets: 4,
   },
   {
+    article: 'Jeans',
     uid: '081250',
     price: 250,
-    color: 'yellow',
+    color: 'Yellow',
     size: 32,
     numberOfPockets: 3,
   },
   {
+    article: 'Jeans',
     uid: '091300',
     price: 300,
-    color: 'blue',
+    color: 'Blue',
     size: 34,
     numberOfPockets: 4,
   },
   {
+    article: 'Jeans',
     uid: '101300',
     price: 300,
-    color: 'red',
+    color: 'Red',
     size: 30,
     numberOfPockets: 2,
   },
@@ -73,48 +83,55 @@ export const mockJeans = [
 
 export const mockTShirts = [
   {
+    article: 'T-Shirt',
     uid: '012100',
     price: 100,
-    color: 'white',
+    color: 'White',
     size: 'S',
     material: 'cotton',
   },
   {
+    article: 'T-Shirt',
     uid: '022100',
     price: 100,
-    color: 'black',
+    color: 'Black',
     size: 'S',
     material: 'cotton',
   },
   {
+    article: 'T-Shirt',
     uid: '032100',
     price: 100,
-    color: 'grey',
+    color: 'Grey',
     size: 'M',
     material: 'cotton',
   },
   {
+    article: 'T-Shirt',
     uid: '042100',
     price: 100,
-    color: 'white',
+    color: 'White',
     size: 'L',
     material: 'cotton',
   },
   {
+    article: 'T-Shirt',
     uid: '052100',
     price: 100,
-    color: 'white',
+    color: 'White',
     size: 'XL',
     material: 'cotton',
   },
   {
+    article: 'T-Shirt',
     uid: '062200',
     price: 200,
-    color: 'white',
+    color: 'White',
     size: 'S',
     material: 'Cotton and linen',
   },
   {
+    article: 'T-Shirt',
     uid: '072200',
     price: 200,
     color: 'Red',
@@ -122,6 +139,7 @@ export const mockTShirts = [
     material: 'Cotton and linen',
   },
   {
+    article: 'T-Shirt',
     uid: '082200',
     price: 200,
     color: 'Grey',
@@ -129,6 +147,7 @@ export const mockTShirts = [
     material: 'Cotton and linen',
   },
   {
+    article: 'T-Shirt',
     uid: '092200',
     price: 200,
     color: 'White',
@@ -136,6 +155,7 @@ export const mockTShirts = [
     material: 'Cotton and linen',
   },
   {
+    article: 'T-Shirt',
     uid: '102200',
     price: 200,
     color: 'Green',
@@ -146,6 +166,7 @@ export const mockTShirts = [
 
 export const mockDresses = [
   {
+    article: 'Dress',
     uid: '013100',
     price: 100,
     color: 'Red',
@@ -153,6 +174,7 @@ export const mockDresses = [
     length: 'Above the knee',
   },
   {
+    article: 'Dress',
     uid: '023100',
     price: 100,
     color: 'Blue',
@@ -160,6 +182,7 @@ export const mockDresses = [
     length: 'Above the knee',
   },
   {
+    article: 'Dress',
     uid: '033100',
     price: 100,
     color: 'Red',
@@ -167,6 +190,7 @@ export const mockDresses = [
     length: 'Above the knee',
   },
   {
+    article: 'Dress',
     uid: '043100',
     price: 100,
     color: 'Red',
@@ -174,6 +198,7 @@ export const mockDresses = [
     length: 'Above the knee',
   },
   {
+    article: 'Dress',
     uid: '053100',
     price: 100,
     color: 'Blue',
@@ -181,6 +206,7 @@ export const mockDresses = [
     length: 'Above the knee',
   },
   {
+    article: 'Dress',
     uid: '063200',
     price: 200,
     color: 'Red',
@@ -188,6 +214,7 @@ export const mockDresses = [
     length: 'Bellow the knee',
   },
   {
+    article: 'Dress',
     uid: '073200',
     price: 200,
     color: 'Blue',
@@ -195,6 +222,7 @@ export const mockDresses = [
     length: 'Bellow the knee',
   },
   {
+    article: 'Dress',
     uid: '083200',
     price: 200,
     color: 'Red',
@@ -202,6 +230,7 @@ export const mockDresses = [
     length: 'Bellow the knee',
   },
   {
+    article: 'Dress',
     uid: '093200',
     price: 200,
     color: 'Red',
@@ -209,6 +238,7 @@ export const mockDresses = [
     length: 'Bellow the knee',
   },
   {
+    article: 'Dress',
     uid: '103200',
     price: 200,
     color: 'Blue',

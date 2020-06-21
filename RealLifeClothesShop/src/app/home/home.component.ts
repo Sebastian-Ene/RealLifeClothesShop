@@ -13,11 +13,16 @@ export class HomeComponent implements OnInit {
   displayCustomers = 'none';
   displayProducts = 'none';
   displayDresrooms = 'none';
+  displayProductList = 'none';
+  displayJeans = 'none';
+  displayDresses = 'none';
+  displayTShirts = 'none';
   jeans = [];
   tShirts = [];
   dresses = [];
   selectedCustomer: number = null;
   selectedDressroom: number = null;
+  selectedProduct = { position: -1, article: '' };
   dressrooms = [null, null, null, null];
   customers = [];
   customersQueue = [];
@@ -29,8 +34,6 @@ export class HomeComponent implements OnInit {
     this.getJeans();
     this.getDresses();
     this.getTShirts();
-    console.log(this.jeans, this.dresses, this.tShirts);
-
   }
 
   displayToggle(toToggle) {
@@ -125,26 +128,49 @@ export class HomeComponent implements OnInit {
 
   useDressroom(selectedCustomer: number) {
     if (this.anythingSelected(selectedCustomer)) {
-      let isInDressroom1: number;
-      let emptyDressroom: number;
-      for (let i = 3; i > 0; i--) {
-        if (this.dressrooms[i] === null) {
-          emptyDressroom = i;
+      if (this.customers[this.selectedCustomer].productList.length < 3) {
+        let isInDressroom1: number;
+        let emptyDressroom: number;
+        for (let i = 3; i > 0; i--) {
+          if (this.dressrooms[i] === null) {
+            emptyDressroom = i;
+          }
+          if (this.dressrooms[i] === this.customers[selectedCustomer]) {
+            isInDressroom1 = 1;
+          }
         }
-        if (this.dressrooms[i] === this.customers[selectedCustomer]) {
-          isInDressroom1 = 1;
+        if (isInDressroom1) { alert('Customer is already in a dressroom'); }
+        else {
+          if (emptyDressroom === undefined) { alert('All dressrooms are full'); }
+          else { this.dressrooms[emptyDressroom] = this.customers[selectedCustomer]; }
         }
       }
-      if (isInDressroom1) { alert('Customer is already in a dressroom'); }
-      else {
-        if (emptyDressroom === undefined) { alert('All dressrooms are full'); }
-        else { this.dressrooms[emptyDressroom] = this.customers[selectedCustomer]; }
-      }
+      else { alert('Customers has more than 3 products !!!'); }
     }
-    this.displayDresrooms = 'block';
   }
   freeDressroom() {
     if (this.dressrooms[this.selectedDressroom] == null || undefined) { alert('Select a dressroom that is not empty!'); }
     this.dressrooms[this.selectedDressroom] = null;
+  }
+  pickProduct() {
+    if (this.selectedProduct.article === 'dresses') {
+      this.customers[this.selectedCustomer].productList.push(this.dresses.splice(this.selectedProduct.position, 1)[0]);
+    }
+    else if (this.selectedProduct.article === 'jeans') {
+      this.customers[this.selectedCustomer].productList.push(this.jeans.splice(this.selectedProduct.position, 1)[0]);
+    }
+    else if (this.selectedProduct.article === 'tShirts') {
+      this.customers[this.selectedCustomer].productList.push(this.tShirts.splice(this.selectedProduct.position, 1)[0]);
+    }
+    this.selectedProduct = { position: -1, article: '' };
+  }
+  calcTotal() {
+    let i = 0;
+    let x = 0;
+    while (i < this.customers[this.selectedCustomer].productList.length) {
+      x += this.customers[this.selectedCustomer].productList[i].price;
+      i++;
+    }
+    this.customers[this.selectedCustomer].total = x;
   }
 }

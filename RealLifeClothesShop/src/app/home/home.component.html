@@ -1,40 +1,48 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
   <div class="left">
-    <button (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
-    <button (click)="addPresetCust()">Add Preset Customer</button>
-    <button (click)="displayProducts=displayToggle(displayProducts)">Products</button>
+    <p class="selectedCustomer" *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is: <br>
+      First Name: {{ customers[selectedCustomer].custGetter().firstName }} <br>
+      Last Name: {{ customers[selectedCustomer].custGetter().lastName }} <br>
+      Product List:<br>
+      <span *ngFor="let Product of customers[selectedCustomer].productList; index as i">
+        {{Product.color}}
+        {{Product.article}},
+        Size {{Product.size}},
+        Price {{Product.price}}<br></span>
+
+      Total: {{customers[selectedCustomer].total}}
+    </p>
+    <button class="mainbtn" (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
+    <button (click)="addPresetCust()" [style.display]="displayCustomers">Add Preset Customer</button>
+    <button (click)='addCustomer(custFName,custLName)' [style.display]="displayCustomers">Add customer</button>
+    <label for="custFName" [style.display]="displayCustomers">First Name:</label>
+    <input type="text" (keyup)="custFName=$event.target.value" [style.display]="displayCustomers">
+    <label for="custLName" [style.display]="displayCustomers">Last Name:</label>
+    <input type="text" (keyup)="custLName=$event.target.value" [style.display]="displayCustomers">
+    <button (click)="removeCustomer(selectedCustomer)" [style.display]="displayCustomers">Remove customer</button>
+    <button class="mainbtn" (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
+    <button (click)="useDressroom(selectedCustomer)" [style.display]="displayDresrooms">Use Dressroom</button>
+    <button (click)="freeDressroom()" [style.display]="displayDresrooms">Leave Dressroom</button>
+    <button class="mainbtn"
+      (click)="displayProducts=displayToggle(displayProducts); displayProductList=displayToggle(displayProductList)">Products</button>
     <div class="productButtons" [style.display]="displayProducts">
-      <button>Jeans</button>
-      <button>T-shirts</button>
-      <button>Dresses</button>
+      <button (click)="displayJeans=displayToggle(displayJeans)">Jeans</button>
+      <button (click)="displayTShirts=displayToggle(displayTShirts)">T-shirts</button>
+      <button (click)="displayDresses=displayToggle(displayDresses)">Dresses</button>
+      <button (click)="pickProduct(); calcTotal()">Pick product</button>
     </div>
-    <button (click)='addCustomer(custFName,custLName)'>Add customer</button>
-    <label for="custFName">First Name:</label>
-    <input type="text" (keyup)="custFName=$event.target.value"> <br>
-    <label for="custLName">Last Name:</label>
-    <input type="text" (keyup)="custLName=$event.target.value">
-    <button (click)="removeCustomer(selectedCustomer)">Remove customer</button>
-    <button (click)="displayDresrooms = displayToggle(displayDresrooms)">Dressrooms</button>
-    <button (click)="useDressroom(selectedCustomer)">Use Dressroom</button>
-    <button (click)="freeDressroom()">Leave Dressroom</button>
-    <button>Add product</button>
-    <button>Show total</button>
   </div>
   <div class=" right">
     <div class="customersList" [style.display]="displayCustomers">
-      <p *ngIf="(selectedCustomer !=null|| undefined)">Selected customer is: <br>
-        First Name: {{ customers[selectedCustomer].custGetter().firstName }} <br>
-        Last Name: {{ customers[selectedCustomer].custGetter().lastName }} <br>
-        Product List: {{customers[selectedCustomer].productList}} <br>
-        Total: {{customers[selectedCustomer].total}}
-      </p>
-      <p> Customers in shop: {{customers.length}}/10</p>
-      <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)">
+
+      <p> Customers in shop: {{customers.length}}/10 </p>
+      <div class="customers" *ngFor="let Customer of customers; index as i" (click)="selectCustomer(i)"
+        [style.background-color]="i==selectedCustomer? ' #fce8e8': '#fcfae7' ">
         {{ customers[i].custGetter().firstName }}
         {{ customers[i].custGetter().lastName }} <br />
       </div>
-      <div class="customersQueueContainer" *ngIf="(customersQueue.length)">
+      <div class=" customersQueueContainer" *ngIf="(customersQueue.length)">
         <p>Customers in queue outside</p>
         <div class="customersQueue" *ngFor="let Customer of customersQueue; index as i">
           {{ customersQueue[i].custGetter().firstName }}
@@ -42,19 +50,44 @@
         </div>
       </div>
     </div>
-    <div class="products">
-      Products:
+    <div class="products" [style.display]="displayProductList">
+      <p> Products: </p>
+      <div class="Jeans" [style.display]="displayJeans">
+        <p>Jeans</p>
+        <span *ngFor="let mockJeans of jeans; index as i" (click)="selectedProduct={position:i, article:'jeans'}"
+          [style.background-color]="i==selectedProduct.position && selectedProduct.article=='jeans' ? 'white':'#fcfae7'">
+          {{mockJeans.color}} Jeans, Size {{mockJeans.size}}, Price {{mockJeans.price}} <br>
+        </span>
+      </div>
+      <div class="dresses" [style.display]="displayDresses">
+        <p> Dresses: </p>
+        <span *ngFor="let mockDresses of dresses; index as i" (click)="selectedProduct={position:i, article:'dresses'}"
+          [style.background-color]="i==selectedProduct.position && selectedProduct.article=='dresses' ? 'white':'#fcfae7'">
+          {{mockDresses.color}} Dresses, Size {{mockDresses.size}}, Price {{mockDresses.price}} <br>
+        </span>
+      </div>
+      <div class="TShirts" [style.display]="displayTShirts">
+        <p> T-Shirts:</p>
+        <span *ngFor="let mockTShirts of tShirts; index as i" (click)="selectedProduct={position:i, article:'tShirts'}"
+          [style.background-color]="i==selectedProduct.position && selectedProduct.article=='tShirts' ? 'white':'#fcfae7'">
+          {{mockTShirts.color}} T-Shirts, Size {{mockTShirts.size}}, Price {{mockTShirts.price}} <br>
+        </span>
+      </div>
     </div>
     <div class="dresroom" [style.display]="displayDresrooms">
-      <span (click)="selectedDressroom=1"> Dressroom 1:
+      <p> Dressrooms </p><br>
+      <span (click)="selectedDressroom=1"
+        [style.background-color]="selectedDressroom==1 ? 'rgb(232, 232, 252)': '#fcfae7'"> Dressroom 1:
         {{(dressrooms[1])? dressrooms[1].custGetter().firstName +  ' ' + dressrooms[1].custGetter().lastName: "Empty"}}
       </span>
       <br>
-      <span (click)="selectedDressroom=2"> Dressroom 2:
+      <span (click)="selectedDressroom=2"
+        [style.background-color]="selectedDressroom==2 ? 'rgb(232, 232, 252)': '#fcfae7'"> Dressroom 2:
         {{(dressrooms[2])? dressrooms[2].custGetter().firstName +  ' ' + dressrooms[2].custGetter().lastName: "Empty"}}
       </span>
       <br>
-      <span (click)="selectedDressroom=3"> Dressroom 3:
+      <span (click)="selectedDressroom=3"
+        [style.background-color]="selectedDressroom==3 ? 'rgb(232, 232, 252)': '#fcfae7'"> Dressroom 3:
         {{(dressrooms[3])? dressrooms[3].custGetter().firstName +  ' ' + dressrooms[3].custGetter().lastName: "Empty"}}
       </span>
       <br>
