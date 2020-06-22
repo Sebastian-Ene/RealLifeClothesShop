@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
 
   useDressroom(selectedCustomer: number) {
     if (this.anythingSelected(selectedCustomer)) {
-      if (this.customers[this.selectedCustomer].productList.length < 3) {
+      if (this.customers[this.selectedCustomer].productList.length < 4 && this.customers[this.selectedCustomer].productList.length > 0) {
         let isInDressroom1: number;
         let emptyDressroom: number;
         for (let i = 3; i > 0; i--) {
@@ -145,6 +145,7 @@ export class HomeComponent implements OnInit {
           else { this.dressrooms[emptyDressroom] = this.customers[selectedCustomer]; }
         }
       }
+      else if (this.customers[this.selectedCustomer].productList.length === 0) { alert("Customer has no products to try on") }
       else { alert('Customers has more than 3 products !!!'); }
     }
   }
@@ -153,16 +154,19 @@ export class HomeComponent implements OnInit {
     this.dressrooms[this.selectedDressroom] = null;
   }
   pickProduct() {
-    if (this.selectedProduct.article === 'dresses') {
-      this.customers[this.selectedCustomer].productList.push(this.dresses.splice(this.selectedProduct.position, 1)[0]);
+    if (this.anythingSelected(this.selectedCustomer)) {
+      if (this.selectedProduct.position === -1) { alert('Please select a product!'); }
+      else if (this.selectedProduct.article === 'dresses') {
+        this.customers[this.selectedCustomer].productList.push(this.dresses.splice(this.selectedProduct.position, 1)[0]);
+      }
+      else if (this.selectedProduct.article === 'jeans') {
+        this.customers[this.selectedCustomer].productList.push(this.jeans.splice(this.selectedProduct.position, 1)[0]);
+      }
+      else if (this.selectedProduct.article === 'tShirts') {
+        this.customers[this.selectedCustomer].productList.push(this.tShirts.splice(this.selectedProduct.position, 1)[0]);
+      }
+      this.selectedProduct = { position: -1, article: '' };
     }
-    else if (this.selectedProduct.article === 'jeans') {
-      this.customers[this.selectedCustomer].productList.push(this.jeans.splice(this.selectedProduct.position, 1)[0]);
-    }
-    else if (this.selectedProduct.article === 'tShirts') {
-      this.customers[this.selectedCustomer].productList.push(this.tShirts.splice(this.selectedProduct.position, 1)[0]);
-    }
-    this.selectedProduct = { position: -1, article: '' };
   }
   calcTotal() {
     let i = 0;

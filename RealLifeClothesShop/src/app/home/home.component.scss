@@ -3,12 +3,11 @@
   display: grid;
   grid-template-columns: 25% 75%;
 
-
   button {
     display: block;
-    background-color: whitesmoke;
-    border-radius: 1em;
-    border-width: thin;
+    background-color: #cbf1f5;
+    border: none;
+    border-radius: 6px;
     outline: none;
     min-width: 12em;
     padding: 0.5em 0em;
@@ -30,16 +29,23 @@
 
 .customers {
   padding: 0.2em;
-}
-
-li {
-  list-style: none;
-}
-
-ul {
-  padding: 0;
+  cursor: pointer;
 }
 
 .selectedCustomer {
-  background-color: #fce8e8;
+  background-color: #71c9ce;
+}
+
+.dressroom {
+  span {
+    cursor: pointer;
+  }
+}
+
+.Jeans,
+.dresses,
+.TShirts {
+  span {
+    cursor: pointer;
+  }
 }
