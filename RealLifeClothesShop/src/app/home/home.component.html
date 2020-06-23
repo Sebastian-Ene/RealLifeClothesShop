@@ -17,11 +17,9 @@
     <button (click)="displayCustomers=displayToggle(displayCustomers)">Customers </button>
     <div class="customerButtonList" [style.display]="displayCustomers">
       <button (click)="addPresetCust()">Add Preset Customer</button>
+      <input type="text" placeholder="First Name" (keyup)="custFName=$event.target.value"> <br>
+      <input type="text" placeholder="Last Name" (keyup)="custLName=$event.target.value"> <br>
       <button (click)='addCustomer(custFName,custLName)'>Add customer</button>
-      <label for="custFName">First Name:</label>
-      <input type="text" (keyup)="custFName=$event.target.value"> <br>
-      <label for="custLName">Last Name:</label>
-      <input type="text" (keyup)="custLName=$event.target.value">
       <button (click)="removeCustomer(selectedCustomer); queueToShop()">Remove customer</button>
     </div>
 
