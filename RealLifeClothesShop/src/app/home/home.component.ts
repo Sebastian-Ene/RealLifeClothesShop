@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   selectedCustomer: number = null;
   selectedDressroom: number = null;
   selectedProduct = { position: -1, article: '' };
-  dressrooms = [null, null, null, null];
+  dressrooms = [null, null, null];
   customers = [];
   customersQueue = [];
   custFName: string;
@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
   anythingSelected(selectedCustomer) {
     // tslint:disable-next-line: triple-equals
     if (selectedCustomer == undefined || null) {
-      alert('Select a customer first!');
       return 0;
     }
     else { return 1; }
@@ -68,29 +67,27 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  addCustomer(aCustFName, aCustLName) {
-    this.displayCustomers = 'block';
+  addCustomer(CustFName, CustLName) {
     // tslint:disable-next-line: triple-equals
-    if (aCustFName == undefined || '' || null) { alert('Please complete the First Name field'); }
+    if (CustFName == undefined || '' || null) { alert('Please complete the First Name field'); }
     // tslint:disable-next-line: triple-equals
-    else if (aCustLName == undefined || '' || null) { alert('Please complete the Last Name field'); }
+    else if (CustLName == undefined || '' || null) { alert('Please complete the Last Name field'); }
     else {
       if (this.customers.length < 10) {
         this.customers.push(new Customer(
-          aCustFName,
-          aCustLName
+          CustFName,
+          CustLName
         ));
       }
 
       else {
         this.customersQueue.push(new Customer(
-          aCustFName,
-          aCustLName
+          CustFName,
+          CustLName
         ));
       }
     }
   }
-
 
   addPresetCust() {
     if (mockCust.length === 0) { alert('No more preset customers available!'); }
@@ -100,23 +97,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  selectCustomer(i: number) {
-
-    this.selectedCustomer = i;
+  selectCustomer(selected: number) {
+    this.selectedCustomer = selected;
   }
 
-  removeCustomer(j: number) {
-    if (this.anythingSelected(j)) {
-      for (let i = 1; i < 4; i++) {
-        if (this.dressrooms[i] === this.customers[j]) {
-          this.dressrooms[i] = null;
-        }
+  removeCustomer(selected: number) {
+    if (this.anythingSelected(selected)) {
+      for (let i = 0; i < 3; i++) {
+        if (this.dressrooms[i] === this.customers[selected]) { this.dressrooms[i] = null; }
       }
-      this.customers.splice(j, 1);
-      this.queueToShop();
-      this.displayCustomers = 'block';
+      this.customers.splice(selected, 1);
       this.selectedCustomer = null;
     }
+    else { alert('Select a customer first!'); }
   }
 
   queueToShop() {
@@ -126,28 +119,29 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  useDressroom(selectedCustomer: number) {
-    if (this.anythingSelected(selectedCustomer)) {
-      if (this.customers[this.selectedCustomer].productList.length < 4 && this.customers[this.selectedCustomer].productList.length > 0) {
+  useDressroom(selected: number) {
+    if (this.anythingSelected(selected)) {
+      if (this.customers[selected].productList.length > 0 && this.customers[selected].productList.length < 4) {
         let isInDressroom1: number;
         let emptyDressroom: number;
-        for (let i = 3; i > 0; i--) {
+        for (let i = 2; i >= 0; i--) {
           if (this.dressrooms[i] === null) {
             emptyDressroom = i;
           }
-          if (this.dressrooms[i] === this.customers[selectedCustomer]) {
+          if (this.dressrooms[i] === this.customers[selected]) {
             isInDressroom1 = 1;
           }
         }
         if (isInDressroom1) { alert('Customer is already in a dressroom'); }
         else {
           if (emptyDressroom === undefined) { alert('All dressrooms are full'); }
-          else { this.dressrooms[emptyDressroom] = this.customers[selectedCustomer]; }
+          else { this.dressrooms[emptyDressroom] = this.customers[selected]; }
         }
       }
-      else if (this.customers[this.selectedCustomer].productList.length === 0) { alert("Customer has no products to try on") }
-      else { alert('Customers has more than 3 products !!!'); }
+      else if (this.customers[selected].productList.length === 0) { alert('Customer has no products to try on!'); }
+      else { alert('Customers has more than 3 products !'); }
     }
+    else { alert('Select a customer first!'); }
   }
   freeDressroom() {
     if (this.dressrooms[this.selectedDressroom] == null || undefined) { alert('Select a dressroom that is not empty!'); }
@@ -167,6 +161,7 @@ export class HomeComponent implements OnInit {
       }
       this.selectedProduct = { position: -1, article: '' };
     }
+    else { alert('Select a customer first!'); }
   }
   calcTotal() {
     let i = 0;

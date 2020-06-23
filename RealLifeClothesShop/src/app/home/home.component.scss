@@ -28,6 +28,7 @@
 }
 
 .customers {
+  margin: 0em 1em;
   padding: 0.2em;
   cursor: pointer;
 }
@@ -37,15 +38,25 @@
 }
 
 .dressroom {
-  span {
+  div {
+    margin: 0em 1em;
     cursor: pointer;
+    padding: 0.2em;
   }
 }
+
 
 .Jeans,
 .dresses,
 .TShirts {
-  span {
+  div {
     cursor: pointer;
+    padding: 0.2em;
   }
+}
+
+.customerButtonList,
+.dressroomButtonList,
+.productsButtonList {
+  margin-left: 2em;
 }
